@@ -1,0 +1,34 @@
+TODO: Dumb Win32 Program
+==================================================================
+
+Project Start: 2020 - 6 - 22
+
+Upcoming
+------------------------------------------------------------------
+
+### Project Close: Documentation
+
+- [ ] Comment Code
+- [ ] Write README
+
+### v0.3.0: Object Oriented Stuff
+
+- [ ] Create Window Class System
+- [ ] Create Other Classes n such... idk.
+
+### v0.2.0: Make a Window with Some Text and a Button
+
+- [ ] Draw Button
+- [ ] Respond to Button click Events
+
+### v0.1.0: Make a Window with Some Text
+
+- [ ] Create Window
+- [ ] Draw Text
+
+Completed
+------------------------------------------------------------------
+
+### v0.0.0: Initialize Project
+
+- [x] Initialize Project

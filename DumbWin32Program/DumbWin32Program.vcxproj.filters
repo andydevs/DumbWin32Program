@@ -13,5 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Documentation Files">
+      <UniqueIdentifier>{6302cb65-0a54-40a5-be1a-1b04b41eb6a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TODO.md">
+      <Filter>Documentation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
