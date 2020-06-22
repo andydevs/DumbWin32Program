@@ -21,13 +21,13 @@ Upcoming
 - [ ] Draw Button
 - [ ] Respond to Button click Events
 
+Completed
+------------------------------------------------------------------
+
 ### v0.1.0: Make a Window with Some Text
 
 - [x] Create Window (Completed: 2020 - 06 - 22)
-- [ ] Draw Text
-
-Completed
-------------------------------------------------------------------
+- [x] Draw Text (Completed: 2020 - 06 - 22)
 
 ### v0.0.0: Initialize Project
 

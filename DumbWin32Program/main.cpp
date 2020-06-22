@@ -12,8 +12,19 @@ LRESULT CALLBACK WndProc(
 	_In_ LPARAM lParam
 )
 {
+	// Paint stuff
+	PAINTSTRUCT ps;
+	HDC hdc;
+	TCHAR text[] = _T("I'm Yute Uncle Barry!");
+
+	// Handle incoming messages
 	switch (message)
 	{
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &ps);
+		TextOut(hdc, 5, 5, text, _tcslen(text));
+		EndPaint(hWnd, &ps);
+		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
@@ -58,7 +69,7 @@ int CALLBACK WinMain(
 		szTitle,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, // Position
-		CW_USEDEFAULT, CW_USEDEFAULT, // Size
+		500, 100, // Size
 		NULL,
 		NULL,
 		hInstance,
