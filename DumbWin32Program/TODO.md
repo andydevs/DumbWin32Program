@@ -23,7 +23,7 @@ Upcoming
 
 ### v0.1.0: Make a Window with Some Text
 
-- [ ] Create Window
+- [x] Create Window (Completed: 2020 - 06 - 22)
 - [ ] Draw Text
 
 Completed
@@ -31,4 +31,4 @@ Completed
 
 ### v0.0.0: Initialize Project
 
-- [x] Initialize Project
+- [x] Initialize Project (Completed: 2020 - 06 - 22)
