@@ -1,9 +1,28 @@
 #include <Windows.h>
 #include <tchar.h>
+#include <iostream>
+
+// Change text command ID
+#define ID_CHANGETEXT 1
 
 // String buffers for window class name and window title
 const TCHAR szWindowClass[] = _T("DesktopApp");
 const TCHAR szTitle[] = _T("Dumb Win32 Program");
+
+// String buffers for text
+#define NTEXTS 5
+const TCHAR* texts[NTEXTS] = {
+	L"I'm Yute Uncle Barry!",
+	L"NAAAAAaaaAAAAAH",
+	L"GET IN THE CAAAAH MORTYY",
+	L"They're Bureaucrats Morty, I don't Respect  them",
+	L"Oh don't worry you little morty head morty"
+};
+// Current text to display
+int currText = 0;
+
+// Window stuff
+HWND hButton;
 
 LRESULT CALLBACK WndProc(
 	_In_ HWND hWnd,
@@ -15,16 +34,38 @@ LRESULT CALLBACK WndProc(
 	// Paint stuff
 	PAINTSTRUCT ps;
 	HDC hdc;
-	TCHAR text[] = _T("I'm Yute Uncle Barry!");
 
 	// Handle incoming messages
 	switch (message)
 	{
+	case WM_CREATE:
+		hButton = CreateWindow(
+			_T("BUTTON"),
+			_T("Change Text"),
+			WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
+			350, 30, 100, 25,
+			hWnd,
+			(HMENU)ID_CHANGETEXT,
+			GetModuleHandle(NULL),
+			NULL
+		);
+		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		TextOut(hdc, 5, 5, text, _tcslen(text));
+		TextOut(hdc, 5, 5, texts[currText], _tcslen(texts[currText]));
 		EndPaint(hWnd, &ps);
 		return 0;
+	case WM_COMMAND:
+		switch (wParam)
+		{
+		case ID_CHANGETEXT:
+			currText = (currText + 1) % NTEXTS;
+			InvalidateRect(hWnd, 0, TRUE);
+			break;
+		default:
+			break;
+		}
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
@@ -38,7 +79,7 @@ int CALLBACK WinMain(
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPSTR lpCmdLine,
 	_In_ int nCmdShow
-) 
+)
 {
 	// Create window class
 	WNDCLASS wc;

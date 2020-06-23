@@ -16,13 +16,13 @@ Upcoming
 - [ ] Create Window Class System
 - [ ] Create Other Classes n such... idk.
 
-### v0.2.0: Make a Window with Some Text and a Button
-
-- [ ] Draw Button
-- [ ] Respond to Button click Events
-
 Completed
 ------------------------------------------------------------------
+
+### v0.2.0: Make a Window with Some Text and a Button
+
+- [x] Draw Button (Completed: 2020 - 06 - 23)
+- [x] Respond to Button click Events (Completed: 2020 - 06 - 23)
 
 ### v0.1.0: Make a Window with Some Text
 
