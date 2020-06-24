@@ -143,6 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextCycler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextCycler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

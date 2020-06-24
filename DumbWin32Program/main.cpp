@@ -1,3 +1,4 @@
+#include "TextCycler.h"
 #include <Windows.h>
 #include <tchar.h>
 #include <iostream>
@@ -9,17 +10,8 @@
 const TCHAR szWindowClass[] = _T("DesktopApp");
 const TCHAR szTitle[] = _T("Dumb Win32 Program");
 
-// String buffers for text
-#define NTEXTS 5
-const TCHAR* texts[NTEXTS] = {
-	L"I'm Yute Uncle Barry!",
-	L"NAAAAAaaaAAAAAH",
-	L"GET IN THE CAAAAH MORTYY",
-	L"They're Bureaucrats Morty, I don't Respect  them",
-	L"Oh don't worry you little morty head morty"
-};
-// Current text to display
-int currText = 0;
+// Text cycler stuff
+TextCycler* cycler;
 
 // Window stuff
 HWND hButton;
@@ -52,20 +44,20 @@ LRESULT CALLBACK WndProc(
 		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		TextOut(hdc, 5, 5, texts[currText], _tcslen(texts[currText]));
+		TextOut(hdc, 5, 5, cycler->current_text(), _tcslen(cycler->current_text()));
 		EndPaint(hWnd, &ps);
 		return 0;
 	case WM_COMMAND:
 		switch (wParam)
 		{
 		case ID_CHANGETEXT:
-			currText = (currText + 1) % NTEXTS;
+			cycler->next_text();
 			InvalidateRect(hWnd, 0, TRUE);
 			break;
 		default:
 			break;
 		}
-		break;
+		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
@@ -81,6 +73,14 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow
 )
 {
+	// Initialize texts system
+	cycler = new TextCycler();
+	cycler->push_text(L"I'm Yute Uncle Barry!");
+	cycler->push_text(L"NAAAAaaaaAAAAHHH!");
+	cycler->push_text(L"They're bureaucrats, Morty! I don't respect them!");
+	cycler->push_text(L"Oh don't worry your little morty head morty!");
+	cycler->push_text(L"I was having a little Morty sleep");
+
 	// Create window class
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -136,6 +136,9 @@ int CALLBACK WinMain(
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+
+	// Clear memory
+	delete cycler;
 
 	// Return final message status?
 	return (int)msg.wParam;
