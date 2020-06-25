@@ -69,17 +69,10 @@ LRESULT CALLBACK WndProc(
 	}
 }
 
-int CALLBACK WinMain(
-	_In_ HINSTANCE hInstance,
-	_In_opt_ HINSTANCE hPrevInstance,
-	_In_ LPSTR lpCmdLine,
-	_In_ int nCmdShow
-)
+void RegisterWindowClass(
+	HINSTANCE hInstance,
+	const TCHAR className[])
 {
-	// Initialize texts system
-	TextCyclerFactory *factory = new BushworldTextCyclerFactory();
-	cycler = factory->createTextCycler();
-
 	// Create window class
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -100,8 +93,23 @@ int CALLBACK WinMain(
 			_T("Call to RegisterClassEx failed!"),
 			_T("Dumb Win32 Program"),
 			NULL);
-		return 1;
+		exit(1);
 	}
+}
+
+int CALLBACK WinMain(
+	_In_ HINSTANCE hInstance,
+	_In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPSTR lpCmdLine,
+	_In_ int nCmdShow
+)
+{
+	// Initialize texts system
+	TextCyclerFactory *factory = new BushworldTextCyclerFactory();
+	cycler = factory->createTextCycler();
+
+	// Register window class
+	RegisterWindowClass(hInstance, szWindowClass); 
 
 	// Create that window!
 	HWND hWnd = CreateWindow(
