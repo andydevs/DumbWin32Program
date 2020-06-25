@@ -3,21 +3,22 @@ TODO: Dumb Win32 Program
 
 Project Start: 2020 - 6 - 22
 
+Didn't Do
+------------------------------------------------------------------
+
+- Create Window Class System
+- Comment Code
+- Write README
+
 Upcoming
 ------------------------------------------------------------------
 
-### Project Close: Documentation
-
-- [ ] Comment Code
-- [ ] Write README
+Completed
+------------------------------------------------------------------
 
 ### v0.3.0: Object Oriented Stuff
 
-- [ ] Create Window Class System
-- [ ] Create Other Classes n such... idk.
-
-Completed
-------------------------------------------------------------------
+- [x] Create Other Classes n such... idk. (Completed: 2020 - 06 - 24)
 
 ### v0.2.0: Make a Window with Some Text and a Button
 

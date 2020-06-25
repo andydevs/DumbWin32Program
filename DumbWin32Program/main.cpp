@@ -69,9 +69,7 @@ LRESULT CALLBACK WndProc(
 	}
 }
 
-void RegisterWindowClass(
-	HINSTANCE hInstance,
-	const TCHAR className[])
+void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
 {
 	// Create window class
 	WNDCLASS wc;
@@ -97,21 +95,8 @@ void RegisterWindowClass(
 	}
 }
 
-int CALLBACK WinMain(
-	_In_ HINSTANCE hInstance,
-	_In_opt_ HINSTANCE hPrevInstance,
-	_In_ LPSTR lpCmdLine,
-	_In_ int nCmdShow
-)
+HWND CreateAppWindow(HINSTANCE hInstance)
 {
-	// Initialize texts system
-	TextCyclerFactory *factory = new BushworldTextCyclerFactory();
-	cycler = factory->createTextCycler();
-
-	// Register window class
-	RegisterWindowClass(hInstance, szWindowClass); 
-
-	// Create that window!
 	HWND hWnd = CreateWindow(
 		szWindowClass,
 		szTitle,
@@ -129,13 +114,13 @@ int CALLBACK WinMain(
 			_T("Call to CreateWindow failed!"),
 			_T("Dumb Win32 Program"),
 			NULL);
-		return 1;
+		exit(1);
 	}
+	return hWnd;
+}
 
-	// Show that window!
-	ShowWindow(hWnd, nCmdShow);
-	UpdateWindow(hWnd);
-
+int MessageLoop()
+{
 	// Message Loop
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
@@ -143,11 +128,37 @@ int CALLBACK WinMain(
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+	return msg.wParam;
+}
+
+int CALLBACK WinMain(
+	_In_ HINSTANCE hInstance,
+	_In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPSTR lpCmdLine,
+	_In_ int nCmdShow
+)
+{
+	// Initialize texts system
+	TextCyclerFactory *factory = new BushworldTextCyclerFactory();
+	cycler = factory->createTextCycler();
+
+	// Register window class
+	RegisterWindowClass(hInstance, szWindowClass); 
+
+	// Create that window!
+	HWND hWnd = CreateAppWindow(hInstance);
+
+	// Show that window!
+	ShowWindow(hWnd, nCmdShow);
+	UpdateWindow(hWnd);
+
+	// Message Loop
+	int status = MessageLoop();
 
 	// Clear memory
 	delete factory;
 	delete cycler;
 
 	// Return final message status?
-	return (int)msg.wParam;
+	return status;
 }
