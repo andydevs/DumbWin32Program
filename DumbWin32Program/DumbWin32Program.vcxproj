@@ -142,11 +142,16 @@
     <None Include="TODO.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BushworldTextCyclerFactory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextCycler.cpp" />
+    <ClCompile Include="TomskaTextCyclerFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BushworldTextCyclerFactory.h" />
     <ClInclude Include="TextCycler.h" />
+    <ClInclude Include="TextCyclerFactory.h" />
+    <ClInclude Include="TomskaTextCyclerFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

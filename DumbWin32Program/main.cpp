@@ -1,3 +1,6 @@
+#include "TextCyclerFactory.h"
+#include "BushworldTextCyclerFactory.h"
+#include "TomskaTextCyclerFactory.h"
 #include "TextCycler.h"
 #include <Windows.h>
 #include <tchar.h>
@@ -74,12 +77,8 @@ int CALLBACK WinMain(
 )
 {
 	// Initialize texts system
-	cycler = new TextCycler();
-	cycler->push_text(L"I'm Yute Uncle Barry!");
-	cycler->push_text(L"NAAAAaaaaAAAAHHH!");
-	cycler->push_text(L"They're bureaucrats, Morty! I don't respect them!");
-	cycler->push_text(L"Oh don't worry your little morty head morty!");
-	cycler->push_text(L"I was having a little Morty sleep");
+	TextCyclerFactory *factory = new BushworldTextCyclerFactory();
+	cycler = factory->createTextCycler();
 
 	// Create window class
 	WNDCLASS wc;
@@ -138,6 +137,7 @@ int CALLBACK WinMain(
 	}
 
 	// Clear memory
+	delete factory;
 	delete cycler;
 
 	// Return final message status?

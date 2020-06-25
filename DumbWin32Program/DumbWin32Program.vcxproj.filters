@@ -29,9 +29,24 @@
     <ClCompile Include="TextCycler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BushworldTextCyclerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TomskaTextCyclerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextCycler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextCyclerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BushworldTextCyclerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TomskaTextCyclerFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
