@@ -96,18 +96,6 @@ void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
 	}
 }
 
-int MessageLoop()
-{
-	// Message Loop
-	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-	return msg.wParam;
-}
-
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -127,12 +115,17 @@ int CALLBACK WinMain(
 	appWindow.Show(nCmdShow);
 
 	// Message Loop
-	int status = MessageLoop();
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
 	// Clear memory
 	delete factory;
 	delete cycler;
 
 	// Return final message status?
-	return status;
+	return msg.wParam;
 }
