@@ -2,6 +2,7 @@
 #include "BushworldTextCyclerFactory.h"
 #include "TomskaTextCyclerFactory.h"
 #include "TextCycler.h"
+#include "Window.h"
 #include <Windows.h>
 #include <tchar.h>
 #include <iostream>
@@ -95,30 +96,6 @@ void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
 	}
 }
 
-HWND CreateAppWindow(HINSTANCE hInstance)
-{
-	HWND hWnd = CreateWindow(
-		szWindowClass,
-		szTitle,
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, // Position
-		500, 100, // Size
-		NULL,
-		NULL,
-		hInstance,
-		NULL
-	);
-	if (!hWnd)
-	{
-		MessageBox(NULL,
-			_T("Call to CreateWindow failed!"),
-			_T("Dumb Win32 Program"),
-			NULL);
-		exit(1);
-	}
-	return hWnd;
-}
-
 int MessageLoop()
 {
 	// Message Loop
@@ -146,11 +123,8 @@ int CALLBACK WinMain(
 	RegisterWindowClass(hInstance, szWindowClass); 
 
 	// Create that window!
-	HWND hWnd = CreateAppWindow(hInstance);
-
-	// Show that window!
-	ShowWindow(hWnd, nCmdShow);
-	UpdateWindow(hWnd);
+	Window appWindow(szWindowClass, szTitle, 500, 100);
+	appWindow.Show(nCmdShow);
 
 	// Message Loop
 	int status = MessageLoop();
