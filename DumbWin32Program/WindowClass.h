@@ -3,4 +3,8 @@
 #include <Windows.h>
 #include <tchar.h>
 
-void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[]);
+const TCHAR WINDOW_CLASS[] = _T("DesktopApp");
+
+void RegisterWindowClass();
+
+void UnregisterWindowClass();

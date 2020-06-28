@@ -1,11 +1,12 @@
 #include "Window.h"
+#include "WindowClass.h"
 #include "Win32MessageDebug.h"
 #include <tchar.h>
 
-Window::Window(const TCHAR windowClass[], const TCHAR title[], int width, int height)
+Window::Window(const TCHAR title[], int width, int height)
 {
 	m_hWnd = CreateWindow(
-		windowClass,
+		WINDOW_CLASS,
 		title,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, // Position

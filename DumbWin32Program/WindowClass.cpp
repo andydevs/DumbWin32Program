@@ -36,9 +36,11 @@ LRESULT CALLBACK WndProcSetup(
 	}
 }
 
-
-void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
+void RegisterWindowClass()
 {
+	// Get Module Name
+	HINSTANCE hInstance = GetModuleHandle(NULL);
+
 	// Create window class
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -50,7 +52,7 @@ void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wc.lpszMenuName = NULL;
-	wc.lpszClassName = className;
+	wc.lpszClassName = WINDOW_CLASS;
 
 	// Register window class (exit if it doesn't work)
 	if (!RegisterClass(&wc))
@@ -61,4 +63,9 @@ void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
 			NULL);
 		exit(1);
 	}
+}
+
+void UnregisterWindowClass()
+{
+	UnregisterClass(WINDOW_CLASS, GetModuleHandle(NULL));
 }

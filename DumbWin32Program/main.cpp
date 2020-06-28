@@ -8,7 +8,6 @@
 #include <iostream>
 
 // String buffers for window class name and window title
-const TCHAR szWindowClass[] = _T("DesktopApp");
 const TCHAR szTitle[] = _T("Dumb Win32 Program");
 
 int CALLBACK WinMain(
@@ -18,14 +17,14 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow
 )
 {
-	// Initialize texts system
-	TextCyclerFactory *factory = new TomskaTextCyclerFactory();
-
 	// Register window class
-	RegisterWindowClass(hInstance, szWindowClass); 
+	RegisterWindowClass();
+
+	// Initialize texts system
+	TomskaTextCyclerFactory factory;
 
 	// Create that window!
-	Window appWindow(szWindowClass, szTitle, 500, 100);
+	Window appWindow(szTitle, 500, 100);
 	appWindow.Show(nCmdShow);
 
 	// Message Loop
@@ -36,8 +35,8 @@ int CALLBACK WinMain(
 		DispatchMessage(&msg);
 	}
 
-	// Clear memory
-	delete factory;
+	// Unregister Window Class
+	UnregisterWindowClass();
 
 	// Return final message status?
 	return msg.wParam;
