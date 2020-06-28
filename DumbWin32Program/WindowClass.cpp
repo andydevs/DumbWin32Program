@@ -1,4 +1,5 @@
 #include "WindowClass.h"
+#include "Win32MessageDebug.h"
 
 // Change text command ID
 #define ID_CHANGETEXT 1
@@ -16,6 +17,9 @@ LRESULT CALLBACK WndProc(
 	_In_ LPARAM lParam
 )
 {
+	// Debug message
+	DebugWin32Message(message);
+
 	// Paint stuff
 	PAINTSTRUCT ps;
 	HDC hdc;
