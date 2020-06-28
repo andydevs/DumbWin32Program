@@ -1,14 +1,9 @@
+#include "Window.h"
 #include "WindowClass.h"
 #include "Win32MessageDebug.h"
 
 // Change text command ID
 #define ID_CHANGETEXT 1
-
-// Text cycler stuff
-extern TextCycler* cycler;
-
-// Window stuff
-HWND hButton;
 
 LRESULT CALLBACK WndProc(
 	_In_ HWND hWnd,
@@ -18,47 +13,36 @@ LRESULT CALLBACK WndProc(
 )
 {
 	// Debug message
+	OutputDebugString(L"WndProc ");
 	DebugWin32Message(message);
 
-	// Paint stuff
-	PAINTSTRUCT ps;
-	HDC hdc;
+	// Get Window
+	Window* pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	return pWnd->HandleMsg(hWnd, message, wParam, lParam);
+}
 
-	// Handle incoming messages
-	switch (message)
+LRESULT CALLBACK WndProcSetup(
+	_In_ HWND hWnd,
+	_In_ UINT message,
+	_In_ WPARAM wParam,
+	_In_ LPARAM lParam
+)
+{
+	// Debug message
+	OutputDebugString(L"WndProcSetup ");
+	DebugWin32Message(message);
+
+	if (message == WM_NCCREATE)
 	{
-	case WM_CREATE:
-		hButton = CreateWindow(
-			_T("BUTTON"),
-			_T("Change Text"),
-			WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
-			350, 30, 100, 25,
-			hWnd,
-			(HMENU)ID_CHANGETEXT,
-			GetModuleHandle(NULL),
-			NULL
-		);
-		return 0;
-	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		TextOut(hdc, 5, 5, cycler->current_text(), _tcslen(cycler->current_text()));
-		EndPaint(hWnd, &ps);
-		return 0;
-	case WM_COMMAND:
-		switch (wParam)
-		{
-		case ID_CHANGETEXT:
-			cycler->next_text();
-			InvalidateRect(hWnd, 0, TRUE);
-			break;
-		default:
-			break;
-		}
-		return 0;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
-	default:
+		// Initialize window before doing stuff
+		const CREATESTRUCT* const pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
+		Window* const pWnd = static_cast<Window*>(pCreate->lpCreateParams);
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
+		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(WndProc));
+		return pWnd->HandleMsg(hWnd, message, wParam, lParam);
+	}
+	else
+	{
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 }
@@ -69,7 +53,7 @@ void RegisterWindowClass(HINSTANCE hInstance, const TCHAR className[])
 	// Create window class
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc = WndProc;
+	wc.lpfnWndProc = WndProcSetup;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = hInstance;

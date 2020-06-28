@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Win32MessageDebug.h"
 #include <tchar.h>
 
 Window::Window(const TCHAR windowClass[], const TCHAR title[], int width, int height)
@@ -12,7 +13,7 @@ Window::Window(const TCHAR windowClass[], const TCHAR title[], int width, int he
 		NULL,
 		NULL,
 		GetModuleHandle(NULL),
-		NULL
+		this // Pass reference to window class
 	);
 	if (!m_hWnd)
 	{
@@ -38,4 +39,20 @@ void Window::Show(int nCmdShow)
 HWND Window::GetHandle()
 {
 	return m_hWnd;
+}
+
+LRESULT CALLBACK Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	OutputDebugString(L"Window::HandleMsg ");
+	DebugWin32Message(message);
+
+	// Switch message
+	switch (message)
+	{
+	case WM_CLOSE:
+		PostQuitMessage(0);
+		return 0;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
 }

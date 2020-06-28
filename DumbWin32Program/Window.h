@@ -10,5 +10,6 @@ public:
 	~Window();
 	void Show(int nCmdShow);
 	HWND GetHandle();
+	LRESULT CALLBACK HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
 

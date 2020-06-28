@@ -11,8 +11,6 @@
 const TCHAR szWindowClass[] = _T("DesktopApp");
 const TCHAR szTitle[] = _T("Dumb Win32 Program");
 
-TextCycler* cycler;
-
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -22,7 +20,6 @@ int CALLBACK WinMain(
 {
 	// Initialize texts system
 	TextCyclerFactory *factory = new TomskaTextCyclerFactory();
-	cycler = factory->createTextCycler();
 
 	// Register window class
 	RegisterWindowClass(hInstance, szWindowClass); 
@@ -41,7 +38,6 @@ int CALLBACK WinMain(
 
 	// Clear memory
 	delete factory;
-	delete cycler;
 
 	// Return final message status?
 	return msg.wParam;
