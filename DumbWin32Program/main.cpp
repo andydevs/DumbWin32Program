@@ -17,9 +17,6 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow
 )
 {
-	// Register window class
-	RegisterWindowClass();
-
 	// Initialize texts system
 	TomskaTextCyclerFactory factory;
 
@@ -34,9 +31,6 @@ int CALLBACK WinMain(
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
-	// Unregister Window Class
-	UnregisterWindowClass();
 
 	// Return final message status?
 	return msg.wParam;

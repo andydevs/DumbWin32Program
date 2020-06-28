@@ -6,7 +6,7 @@
 Window::Window(const TCHAR title[], int width, int height)
 {
 	m_hWnd = CreateWindow(
-		WINDOW_CLASS,
+		WindowClass::GetInstance()->GetName(),
 		title,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, // Position
