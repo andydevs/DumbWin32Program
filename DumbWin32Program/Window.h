@@ -11,5 +11,7 @@ public:
 	void Show(int nCmdShow);
 	HWND GetHandle();
 	LRESULT CALLBACK HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT OnCreate(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT OnPaint(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT OnClose(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
-

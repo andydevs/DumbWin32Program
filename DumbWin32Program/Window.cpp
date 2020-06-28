@@ -43,16 +43,37 @@ HWND Window::GetHandle()
 
 LRESULT CALLBACK Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	OutputDebugString(L"Window::HandleMsg ");
-	DebugWin32Message(message);
+// Message mapping macro
+#define MAPMESSAGE(MESSAGE, Handler) \
+	case MESSAGE: return Handler(hWnd, message, wParam, lParam);
 
 	// Switch message
 	switch (message)
 	{
-	case WM_CLOSE:
-		PostQuitMessage(0);
-		return 0;
-	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+	MAPMESSAGE(WM_CREATE, OnCreate)
+	MAPMESSAGE(WM_PAINT, OnPaint)
+	MAPMESSAGE(WM_CLOSE, OnClose)
+	default: return DefWindowProc(hWnd, message, wParam, lParam);
 	}
+}
+
+LRESULT Window::OnCreate(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+LRESULT Window::OnPaint(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	TCHAR text[] = L"Example Text";
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint(hWnd, &ps);
+	TextOut(hdc, 25, 10, text, _tcslen(text));
+	EndPaint(hWnd, &ps);
+	return 0;
+}
+
+LRESULT Window::OnClose(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	PostQuitMessage(0);
+	return 0;
 }

@@ -2,9 +2,6 @@
 #include "WindowClass.h"
 #include "Win32MessageDebug.h"
 
-// Change text command ID
-#define ID_CHANGETEXT 1
-
 LRESULT CALLBACK WndProc(
 	_In_ HWND hWnd,
 	_In_ UINT message,
@@ -12,10 +9,6 @@ LRESULT CALLBACK WndProc(
 	_In_ LPARAM lParam
 )
 {
-	// Debug message
-	OutputDebugString(L"WndProc ");
-	DebugWin32Message(message);
-
 	// Get Window
 	Window* pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 	return pWnd->HandleMsg(hWnd, message, wParam, lParam);
@@ -28,10 +21,6 @@ LRESULT CALLBACK WndProcSetup(
 	_In_ LPARAM lParam
 )
 {
-	// Debug message
-	OutputDebugString(L"WndProcSetup ");
-	DebugWin32Message(message);
-
 	if (message == WM_NCCREATE)
 	{
 		// Initialize window before doing stuff
