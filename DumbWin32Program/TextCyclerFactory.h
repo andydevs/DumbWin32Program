@@ -1,5 +1,6 @@
 #pragma once
 #include "TextCycler.h"
+
 class TextCyclerFactory
 {
 public:
