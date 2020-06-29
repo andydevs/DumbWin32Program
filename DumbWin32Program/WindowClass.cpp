@@ -63,7 +63,7 @@ LRESULT CALLBACK WindowClass::WndProcSetup(
 	{
 		// Initialize window before doing stuff
 		const CREATESTRUCT* const pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
-		Window* const pWnd = static_cast<Window*>(pCreate->lpCreateParams);
+		Window* const pWnd = reinterpret_cast<Window*>(pCreate->lpCreateParams);
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
 		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(WindowClass::WndProcDelegate));
 		return pWnd->HandleMsg(hWnd, message, wParam, lParam);

@@ -3,12 +3,10 @@
 #include "TomskaTextCyclerFactory.h"
 #include "WindowClass.h"
 #include "Window.h"
+#include "UIWindow.h"
 #include <Windows.h>
 #include <tchar.h>
 #include <iostream>
-
-// String buffers for window class name and window title
-const TCHAR szTitle[] = _T("Dumb Win32 Program");
 
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
@@ -17,11 +15,14 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow
 )
 {
+	// String buffer for window title
+	TCHAR windowTitle[] = _T("Dumb Win32 Program");
+
 	// Initialize texts system
-	TomskaTextCyclerFactory factory;
+	BushworldTextCyclerFactory factory;
 
 	// Create that window!
-	Window appWindow(szTitle, 500, 100);
+	UIWindow appWindow(factory, windowTitle, 500, 125);
 	appWindow.Show(nCmdShow);
 
 	// Message Loop

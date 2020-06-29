@@ -3,7 +3,28 @@
 #include "Win32MessageDebug.h"
 #include <tchar.h>
 
+Window::Window()
+{
+	m_hWnd = nullptr;
+}
+
 Window::Window(const TCHAR title[], int width, int height)
+{
+	Init(title, width, height);
+}
+
+Window::~Window()
+{
+	DestroyWindow(m_hWnd);
+}
+
+void Window::Show(int nCmdShow)
+{
+	ShowWindow(m_hWnd, nCmdShow);
+	UpdateWindow(m_hWnd);
+}
+
+void Window::Init(const TCHAR title[], int width, int height)
 {
 	m_hWnd = CreateWindow(
 		WindowClass::GetInstance()->GetName(),
@@ -26,17 +47,6 @@ Window::Window(const TCHAR title[], int width, int height)
 	}
 }
 
-Window::~Window()
-{
-	DestroyWindow(m_hWnd);
-}
-
-void Window::Show(int nCmdShow)
-{
-	ShowWindow(m_hWnd, nCmdShow);
-	UpdateWindow(m_hWnd);
-}
-
 HWND Window::GetHandle()
 {
 	return m_hWnd;
@@ -46,7 +56,7 @@ LRESULT CALLBACK Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARA
 {
 // Message mapping macro
 #define MAPMESSAGE(MESSAGE, Handler) \
-	case MESSAGE: return Handler(hWnd, message, wParam, lParam);
+	case MESSAGE: return this->Handler(hWnd, message, wParam, lParam);
 
 	// Switch message
 	switch (message)
@@ -54,6 +64,7 @@ LRESULT CALLBACK Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARA
 	MAPMESSAGE(WM_CREATE, OnCreate)
 	MAPMESSAGE(WM_PAINT, OnPaint)
 	MAPMESSAGE(WM_CLOSE, OnClose)
+	MAPMESSAGE(WM_COMMAND, OnCommand)
 	default: return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 }
@@ -77,4 +88,9 @@ LRESULT Window::OnClose(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	PostQuitMessage(0);
 	return 0;
+}
+
+LRESULT Window::OnCommand(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	return DefWindowProc(hWnd, message, wParam, lParam);
 }

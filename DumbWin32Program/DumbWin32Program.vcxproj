@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextCycler.cpp" />
     <ClCompile Include="TomskaTextCyclerFactory.cpp" />
+    <ClCompile Include="UIWindow.cpp" />
     <ClCompile Include="Win32MessageDebug.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowClass.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="TextCycler.h" />
     <ClInclude Include="TextCyclerFactory.h" />
     <ClInclude Include="TomskaTextCyclerFactory.h" />
+    <ClInclude Include="UIWindow.h" />
     <ClInclude Include="Win32MessageDebug.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowClass.h" />
