@@ -16,6 +16,13 @@ Upcoming
 Completed
 ------------------------------------------------------------------
 
+### v0.4.0: The object oriented stuff works now
+
+- [x] Window class (2020 - 06 - 25)
+- [x] Window procedure delegate messages to class (Completed: 2020 - 06 - 27)
+- [x] WindowClass singleton class (Completed: 2020 - 06 - 28)
+- [x] UIWindow class derived from Window class (Completed 2020 - 06 - 29)
+
 ### v0.3.0: Object Oriented Stuff
 
 - [x] Create Other Classes n such... idk. (Completed: 2020 - 06 - 24)
